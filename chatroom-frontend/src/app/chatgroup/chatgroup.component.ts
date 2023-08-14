@@ -10,13 +10,16 @@ export class ChatgroupComponent implements OnInit {
 
   message:string='';
   
-  constructor(private service:ChatRoomServiceService) { }
+  constructor(public service:ChatRoomServiceService) {
+    this.service.establishConnectionWithWebSocket();
+  }
 
   ngOnInit(): void {
+    
   }
 
   submit(){
-    console.log("sending message : "+this.message);
+    console.log("sending message to kafka : "+this.message);
     this.service.sendMessage(this.message);
   }
 }
