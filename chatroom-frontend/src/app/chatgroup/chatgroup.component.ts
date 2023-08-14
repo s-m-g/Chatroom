@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ChatRoomServiceService } from '../service/chat-room-service.service';
 
 @Component({
   selector: 'app-chatgroup',
@@ -9,12 +10,13 @@ export class ChatgroupComponent implements OnInit {
 
   message:string='';
   
-  constructor() { }
+  constructor(private service:ChatRoomServiceService) { }
 
   ngOnInit(): void {
   }
 
   submit(){
-    console.log(this.message);
+    console.log("sending message : "+this.message);
+    this.service.sendMessage(this.message);
   }
 }

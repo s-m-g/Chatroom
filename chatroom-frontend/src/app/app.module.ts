@@ -7,6 +7,7 @@ import { EntryDoorComponent } from './entry-door/entry-door.component';
 import { FormsModule } from '@angular/forms';
 import { ChatRoomServiceService } from './service/chat-room-service.service';
 import { ChatgroupComponent } from './chatgroup/chatgroup.component';
+import { HttpClientModule } from  '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ChatgroupComponent } from './chatgroup/chatgroup.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     ChatRoomServiceService

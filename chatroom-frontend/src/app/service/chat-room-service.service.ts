@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,7 +6,9 @@ import { Injectable } from '@angular/core';
 })
 export class ChatRoomServiceService {
 
-  constructor() { }
+  sendMsgURL:string="http://localhost:8080/chatroom/publish";
+
+  constructor(private http: HttpClient) { }
 
 
   sendUserRegister(message :string){
@@ -13,6 +16,21 @@ export class ChatRoomServiceService {
   }
 
   sendMessage(message:string){
-    console.log("message sent"+message);
+
+    const body={
+      "user":"alien",
+      "message":message
+    }
+    
+    let observable = this.http.post(this.sendMsgURL, body);
+
+    observable.subscribe({
+      next : (response)=>{
+        console.log(response);
+      },
+      error : (error)=>{
+        console.log(error);
+      }
+    });
   }
 }
