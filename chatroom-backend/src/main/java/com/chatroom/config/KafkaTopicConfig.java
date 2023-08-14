@@ -10,7 +10,7 @@ import org.springframework.kafka.config.TopicBuilder;
 public class KafkaTopicConfig {
 
     @Bean
-    public NewTopic chatRoom1(){
-        return TopicBuilder.name("chatRoom1").build();
+    public NewTopic chatRoom(){
+        return TopicBuilder.name("chatRoom").build();
     }
 }

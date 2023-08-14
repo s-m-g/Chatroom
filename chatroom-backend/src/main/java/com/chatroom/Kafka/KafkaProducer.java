@@ -19,7 +19,7 @@ public class KafkaProducer {
     KafkaTemplate<String, MessageEvent> kafkaTemplate;
 
     public void sendEventToBroker(MessageEvent messageEvent){
-        kafkaTemplate.send("chatRoom1", messageEvent);
-        LOGGER.info(String.format("Message sent to topic-%s: %s", "chatRoom1", messageEvent.toString()));
+        kafkaTemplate.send("chatRoom", messageEvent);
+        LOGGER.info(String.format("Message sent to topic-%s: %s", "chatRoom", messageEvent.toString()));
     }
 }

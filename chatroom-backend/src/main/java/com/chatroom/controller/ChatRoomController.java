@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/chatroom")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ChatRoomController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ChatRoomController.class);

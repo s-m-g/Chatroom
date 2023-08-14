@@ -4,14 +4,14 @@ import com.chatroom.model.MessageEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class KafkaConsumer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaProducer.class);
 
-    @KafkaListener(topics="chatRoom1",
+    @KafkaListener(topics="chatRoom",
                     groupId = "group-id"
     )
     public void listenFromBroker(MessageEvent event){
