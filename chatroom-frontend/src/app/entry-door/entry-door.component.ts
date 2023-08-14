@@ -16,8 +16,20 @@ export class EntryDoorComponent implements OnInit {
   }
 
   submit(){
-    this.service.sendUserRegister(this.username);
-    this.router.navigateByUrl('/chatgroup');
+    let msg={
+      "user":this.username,
+      "message":"",
+      "type":"joining"
+    }
+    console.log("sending message to kafka : "+msg);
+    this.service.sendMessage(msg);
+    localStorage.setItem("username",this.username);
+    // this.router.navigateByUrl('/chatgroup');
+    this.router.navigate(['/chatgroup'],{
+      queryParams:{
+        username: this.username
+      }
+    });
   }
   
 

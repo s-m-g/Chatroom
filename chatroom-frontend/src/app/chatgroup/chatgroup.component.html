@@ -1,16 +1,42 @@
-<div>
-    <div>
+<div class="main">
+    <div class="container ">
+      <div class="chat-log">
+        
+        <!-- <div class="chat-log__item chat-log__item--own">
+          <h3 class="chat-log__author">Fabrício <small>14:30</small></h3>
+          <div class="chat-log__message">BRB</div>
+        </div> -->
         <div *ngFor="let msg of service.msgArr">
-            {{msg}}
-          </div>
-    </div>
-
-    <div class="inputDiv">
-        <div class="sendBtn">
-            <form>
-                <input type="text" name="message" [(ngModel)]="message">
-                <button (click)="submit()">Send</button>
-            </form>
+            <div *ngIf="msg.type==joiningType" class="joining-banner">
+                <p>{{msg.user}} has joined the chat !</p>
+            </div>
+            <div class="chat-log__item" *ngIf="msg.type!=joiningType && msg.user!=currUser">
+                <h3 class="chat-log__author">{{msg.user}}</h3>
+                <div class="chat-log__message">{{msg.message}}</div>
+            </div>
+            <div class="chat-log__item chat-log__item--own" *ngIf="msg.type!=joiningType && msg.user==currUser">
+                <h3 class="chat-log__author">{{msg.user}}</h3>
+                <div class="chat-log__message">{{msg.message}}</div>
+              </div>
         </div>
+            
+      </div>
+    </div>
+    <div class="chat-form">
+      <div class="container ">
+        <form class="form-horizontal">
+          <div class="row">
+            <div class="col-sm-10 col-xs-8">
+              <input type="text" class="form-control" name="message" [(ngModel)]="message" placeholder="Message" />
+            </div>
+            <div class="col-sm-2 col-xs-4">
+              <button type="submit" class="btn btn-success btn-block" (click)="submit()">Send</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
 </div>
+    
+      
+

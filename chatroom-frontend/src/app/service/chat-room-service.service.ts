@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
 import { Message } from '../models/Message';
+import { ChatgroupComponent } from '../chatgroup/chatgroup.component';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class ChatRoomServiceService {
 
   sendMsgURL:string="http://localhost:8080/chatroom/publish";
   wsconnectionURL="http://localhost:8080/connectToWebSocket";
+  topicUrl="/topic/chatRoomAllMessages";
   stompClient: any;
 
   public msgArr:Message[]=[];
@@ -22,14 +24,8 @@ export class ChatRoomServiceService {
     console.log("user register sent : "+message);
   }
 
-  sendMessage(message:string){
-
-    const body={
-      "user":"alien",
-      "message":message
-    }
-    
-    let observable = this.http.post(this.sendMsgURL, body, {responseType: 'text'});
+  sendMessage(message:Message){
+    let observable = this.http.post(this.sendMsgURL, message, {responseType: 'text'});
 
     observable.subscribe({
       next : (response)=>{
@@ -49,12 +45,11 @@ export class ChatRoomServiceService {
 
     const _this = this;
 
-    
     _this.stompClient.connect({}, function(frame:any){
-      _this.stompClient.subscribe("/topic/chatRoomAllMessages", (message:any)=>{
+      _this.stompClient.subscribe(_this.topicUrl, (message:any)=>{
         if(message.body){
           console.log(message.body);
-          _this.msgArr.push(message.body);
+          _this.msgArr.push(JSON.parse(message.body));
         }
       });
     });

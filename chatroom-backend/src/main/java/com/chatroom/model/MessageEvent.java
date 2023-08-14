@@ -4,6 +4,16 @@ public class MessageEvent {
 
     private String user;
     private String message;
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public void setUser(String user) {
         this.user = user;
     }
@@ -25,6 +35,7 @@ public class MessageEvent {
         return "MessageEvent{" +
                 "user='" + user + '\'' +
                 ", message='" + message + '\'' +
+                ", type='" + type + '\'' +
                 '}';
     }
 }

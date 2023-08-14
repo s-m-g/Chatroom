@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatRoomServiceService } from '../service/chat-room-service.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-chatgroup',
@@ -9,17 +10,38 @@ import { ChatRoomServiceService } from '../service/chat-room-service.service';
 export class ChatgroupComponent implements OnInit {
 
   message:string='';
+  currUser:string='default';
+  joiningType:string='joining'
   
-  constructor(public service:ChatRoomServiceService) {
+  constructor(public service:ChatRoomServiceService,
+              private route:ActivatedRoute
+    ) {
     this.service.establishConnectionWithWebSocket();
   }
 
   ngOnInit(): void {
-    
+    this.route.queryParams.subscribe((obj)=>{
+      this.currUser = obj['username'];
+    })
+  }
+
+  ngAfterViewChecked():void{
+    this.goToBottom();
   }
 
   submit(){
+    let msg={
+      "user":this.currUser,
+      "message":this.message,
+      "type":"message"
+    }
     console.log("sending message to kafka : "+this.message);
-    this.service.sendMessage(this.message);
+    this.service.sendMessage(msg);
+    this.message="";
+    
+  }
+
+  goToBottom(){
+    window.scrollTo(0,document.body.scrollHeight);
   }
 }
