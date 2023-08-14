@@ -24,6 +24,7 @@ public class KafkaConsumer {
         // here we can send the received msg to WebSocket broker's topic,
         // from where it will be broadcasted
 
-        template.convertAndSend("/topic/chatRoomAllMessages");
+        template.convertAndSend("/topic/chatRoomAllMessages", event);
+        LOGGER.info("message sent to Web Socket broker");
     }
 }
