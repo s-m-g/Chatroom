@@ -5,22 +5,10 @@
     right:100px;
 } */
 
-.joining-banner{
-    text-align: center;
-}
-
 body {
 	background: #E5DDD5 url("https://www.toptal.com/designers/subtlepatterns/patterns/sports.png") fixed;
 }
-.page-header {
-	background: #006A4E;
-	margin: 0;
-  padding: 20px 0 10px;
-	color: #FFFFFF;
-	position: fixed;
-	width: 100%;
-  z-index: 1
-}
+
 .main {
 	height: 100vh;
 	padding-top: 70px;
@@ -46,6 +34,12 @@ body {
 	float: right;
 	background: #DCF8C6;
 	text-align: right;
+}
+
+.chat-log__item.chat-log__item--joiningNotification {
+	float:none;
+	background: rgb(163, 68, 163);
+	text-align: center;	
 }
 
 .chat-form {

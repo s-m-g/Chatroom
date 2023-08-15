@@ -12,6 +12,7 @@ export class ChatgroupComponent implements OnInit {
   message:string='';
   currUser:string='default';
   joiningType:string='joining'
+  youjoined:boolean=false;
   
   constructor(public service:ChatRoomServiceService,
               private route:ActivatedRoute
@@ -22,7 +23,8 @@ export class ChatgroupComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe((obj)=>{
       this.currUser = obj['username'];
-    })
+    });
+    this.youjoined=true;
   }
 
   ngAfterViewChecked():void{

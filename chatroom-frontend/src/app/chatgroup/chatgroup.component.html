@@ -1,14 +1,18 @@
 <div class="main">
     <div class="container ">
+      
       <div class="chat-log">
         
         <!-- <div class="chat-log__item chat-log__item--own">
           <h3 class="chat-log__author">Fabrício <small>14:30</small></h3>
           <div class="chat-log__message">BRB</div>
         </div> -->
+        <div *ngIf="youjoined" class="joining-banner chat-log__item chat-log__item--joiningNotification">
+          <p><strong>{{currUser}} has joined the chat !</strong> </p>
+        </div>
         <div *ngFor="let msg of service.msgArr">
-            <div *ngIf="msg.type==joiningType" class="joining-banner">
-                <p>{{msg.user}} has joined the chat !</p>
+            <div *ngIf="msg.type==joiningType" class="joining-banner chat-log__item chat-log__item--joiningNotification">
+                <p><strong>{{msg.user}} has joined the chat !</strong> </p>
             </div>
             <div class="chat-log__item" *ngIf="msg.type!=joiningType && msg.user!=currUser">
                 <h3 class="chat-log__author">{{msg.user}}</h3>
